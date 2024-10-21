@@ -11,4 +11,10 @@ public class CustomerController {
     public String testOne(){
         return "Hello World";
     }
+
+    //Ambiguous error occurs
+    /*@GetMapping
+    public String testTwo(){
+        return "Hello World";
+    }*/
 }
