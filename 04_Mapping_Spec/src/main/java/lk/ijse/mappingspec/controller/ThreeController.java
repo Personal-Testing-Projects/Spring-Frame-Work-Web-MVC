@@ -19,4 +19,10 @@ public class ThreeController {
         System.out.println(id+" "+name);
         return "Get method invoked 2";
     }
+
+    @GetMapping(path = "/id/{cusId:[C]{1}[0-9]{3}}/{cusName:[A-Z]{5}}")
+    public String testThree(@PathVariable("cusId") String id, @PathVariable("cusName") String name) {
+        System.out.println(id+" "+name);
+        return "Get method invoked 3";
+    }
 }
