@@ -15,6 +15,12 @@ public class CustomerPOSController {
     @PostMapping
     public void saveCustomer(CustomerDTO customerDTO) {
         System.out.println(customerDTO.getId() + " " + customerDTO.getName() + " " +
-                customerDTO.getAddress() + " " + customerDTO.getPhone());
+                        customerDTO.getAddress() + " " + customerDTO.getPhone());
+    }
+
+    @GetMapping
+    public void saveCustomer2(CustomerDTO customerDTO) {
+        System.out.println(customerDTO.getId() + " " + customerDTO.getName() + " " +
+                        customerDTO.getAddress() + " " + customerDTO.getPhone());
     }
 }
