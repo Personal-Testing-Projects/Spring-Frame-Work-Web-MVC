@@ -6,6 +6,8 @@ $(document).ready(function() {
     validation();
 });
 
+//x-www.form-urlencoded request
+/*
 $('#customer-save').click(function () {
 
     var id = $('#customer-id').val();
@@ -43,6 +45,46 @@ $('#customer-save').click(function () {
         }
     });
 });
+*/
+//JSON request
+$('#customer-save').click(function () {
+
+    var id = $('#customer-id').val();
+    var name = $('#customer-name').val();
+    var address = $('#customer-address').val();
+    var tp = $('#customer-tp').val();
+
+    const customerData = {
+        id: id,
+        name: name,
+        address: address,
+        phone: tp
+    };
+
+    // Convert the customer data to JSON format
+    const jsonData = JSON.stringify(customerData);
+
+    $.ajax({
+        url: "http://localhost:8080/springmapping/customers",
+        type: "POST",
+        data: jsonData, // Send the data as JSON
+        contentType: "application/json", // Set header for JSON data
+        success: (res) => {
+            console.log(JSON.stringify(res));
+            alert("Customer details have been successfully saved.");
+            //loadTable();
+            $('#customer-id').val('');
+            $('#customer-name').val('');
+            $('#customer-address').val('');
+            $('#customer-tp').val('');
+        },
+        error: (res) => {
+            console.error(res);
+            alert("An error occurred while saving customer details. Please try again.");
+        }
+    });
+});
+
 
 function loadTable() {
     var tableBody = $('#table-customer').find('tbody');
