@@ -20,12 +20,14 @@ $('#customer-save').click(function () {
         phone: tp
     };
 
-    const customerJSON = JSON.stringify(customerData);
+    // Convert the customer data to x-www-form-urlencoded format
+    const encodedData = $.param(customerData);
+
     $.ajax({
-        url: "http://localhost:8080/possystem/customer",
+        url: "http://localhost:8080/springmapping/customer",
         type: "POST",
-        data: customerJSON,
-        headers: { "Content-Type": "application/json" },
+        data: encodedData, // Send the data as a query string
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Set header for form data
         success: (res) => {
             console.log(JSON.stringify(res));
             alert("Customer details have been successfully saved.");
