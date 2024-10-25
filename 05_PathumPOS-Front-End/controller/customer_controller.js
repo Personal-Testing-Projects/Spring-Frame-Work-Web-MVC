@@ -65,7 +65,7 @@ $('#customer-save').click(function () {
     const jsonData = JSON.stringify(customerData);
 
     $.ajax({
-        url: "http://localhost:8080/springmapping/customers",
+        url: "http://localhost:8080/springwithmaven/customer",
         type: "POST",
         data: jsonData, // Send the data as JSON
         contentType: "application/json", // Set header for JSON data
