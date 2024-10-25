@@ -79,8 +79,8 @@ $('#customer-save').click(function () {
             $('#customer-tp').val('');
         },
         error: (res) => {
-            console.error(res);
-            alert("An error occurred while saving customer details. Please try again.");
+            var error = JSON.parse(res.responseText);
+            alert(error.message);
         }
     });
 });
