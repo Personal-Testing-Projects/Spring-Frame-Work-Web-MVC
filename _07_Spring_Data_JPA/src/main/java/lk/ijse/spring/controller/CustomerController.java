@@ -1,7 +1,9 @@
 package lk.ijse.spring.controller;
 
 import lk.ijse.spring.dto.CustomerDTO;
+import lk.ijse.spring.repo.CustomerRepo;
 import lk.ijse.spring.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 @RequestMapping("/customer")
 @CrossOrigin
 public class CustomerController {
+    @Autowired
+    private CustomerRepo customerRepo;
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveCustomer(@RequestBody CustomerDTO customerDTO) {
