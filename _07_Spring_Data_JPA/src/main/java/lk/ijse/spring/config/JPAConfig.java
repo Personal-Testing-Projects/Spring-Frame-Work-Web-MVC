@@ -23,7 +23,7 @@ public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("lk.ijse.spring.dto");
+        factoryBean.setPackagesToScan("lk.ijse.spring.entity");
         factoryBean.setDataSource(dataSource);//1.Add datasource
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);//2.Add JPA vendor adapter
         return factoryBean;
