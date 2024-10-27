@@ -48,5 +48,10 @@ public class ItemController {
         return new ResponseUtil("OK", id + " : successfully Deleted!",null);
     }
 
-
+    @GetMapping
+    public ResponseUtil getAllItem() {
+        List<Item> items = itemRepo.findAll();
+        ArrayList<ItemDTO> itemDTOS = modelMapper.map(items, new TypeToken<ArrayList<ItemDTO>>(){}.getType());
+        return new ResponseUtil("OK", "All Items", itemDTOS);
+    }
 }
