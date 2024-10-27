@@ -5,9 +5,13 @@ import lk.ijse.spring.entity.Item;
 import lk.ijse.spring.repo.ItemRepo;
 import lk.ijse.spring.util.ResponseUtil;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/item")
@@ -34,5 +38,15 @@ public class ItemController {
         itemRepo.save(modelMapper.map(itemDTO, Item.class));
         return new ResponseUtil("OK", itemDTO.getId() + " : successfully Updated!",null);
     }
+
+    @DeleteMapping(params = "id")
+    public ResponseUtil deleteItem(@RequestParam("id") String id) {
+        if (!itemRepo.existsById(id)) {
+            throw new RuntimeException("Item is not exists!");
+        }
+        itemRepo.deleteById(id);
+        return new ResponseUtil("OK", id + " : successfully Deleted!",null);
+    }
+
 
 }
