@@ -25,4 +25,14 @@ public class ItemController {
         itemRepo.save(modelMapper.map(itemDTO, Item.class));
         return new ResponseUtil("OK", itemDTO.getId() + " : successfully Added!",null);
     }
+
+    @PutMapping
+    public ResponseUtil updateItem(@RequestBody ItemDTO itemDTO) {
+        if(!itemRepo.existsById(itemDTO.getId())) {
+            throw new RuntimeException("Item is not exists!");
+        }
+        itemRepo.save(modelMapper.map(itemDTO, Item.class));
+        return new ResponseUtil("OK", itemDTO.getId() + " : successfully Updated!",null);
+    }
+
 }
