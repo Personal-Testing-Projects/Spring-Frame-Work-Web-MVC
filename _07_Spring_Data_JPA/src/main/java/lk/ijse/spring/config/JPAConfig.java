@@ -2,8 +2,11 @@ package lk.ijse.spring.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lk.ijse.spring.repo.CustomerRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -19,11 +22,14 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = {CustomerRepo.class})
+@PropertySource("classpath:application.properties")
 public class JPAConfig {
+    @Autowired
+    private Environment env;
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setPackagesToScan("lk.ijse.spring.entity");
+        factoryBean.setPackagesToScan(env.getRequiredProperty("pro.entity"));
         factoryBean.setDataSource(dataSource);//1.Add datasource
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);//2.Add JPA vendor adapter
         return factoryBean;
@@ -34,10 +40,10 @@ public class JPAConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/springjpadb?createDatabaseIfNotExist=true");
-        dataSource.setUsername("root");
-        dataSource.setPassword("Ijse@1234");
+        dataSource.setDriverClassName(env.getRequiredProperty("pro.driver"));
+        dataSource.setUrl(env.getRequiredProperty("pro.url"));
+        dataSource.setUsername(env.getRequiredProperty("pro.username"));
+        dataSource.setPassword(env.getRequiredProperty("pro.password"));
         return dataSource;
     }
 
@@ -46,7 +52,7 @@ public class JPAConfig {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
         hibernateJpaVendorAdapter.setGenerateDdl(true);
-        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
+        hibernateJpaVendorAdapter.setDatabasePlatform(env.getProperty("pro.hibernate.dialect"));
         hibernateJpaVendorAdapter.setShowSql(true);
         return hibernateJpaVendorAdapter;
     }
