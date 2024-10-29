@@ -54,4 +54,9 @@ class CustomerRepoTest {
         //For test this methods we need to add @Transactional
     }
 
+    @Test
+    void findCustomerByNameAndAddress() {
+        Customer customer = customerRepo.findCustomerByNameAndAddress("Pathum", "Kandy");
+        System.out.println(customer.toString());
+    }
 }

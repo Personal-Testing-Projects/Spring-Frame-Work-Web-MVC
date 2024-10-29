@@ -15,4 +15,6 @@ public interface CustomerRepo extends JpaRepository<Customer, String> {
     Boolean existsCustomerByName(String name);
     Integer deleteCustomerByName(String name);
     Integer removeCustomerByName(String name);
+
+    Customer findCustomerByNameAndAddress(String name, String address);
 }
