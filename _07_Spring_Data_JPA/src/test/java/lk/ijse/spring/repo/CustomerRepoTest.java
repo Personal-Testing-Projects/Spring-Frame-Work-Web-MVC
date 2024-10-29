@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @WebAppConfiguration//create the testing context
 @ContextConfiguration(classes = {WebRootConfig.class})//add configuration for that context
 @ExtendWith(SpringExtension.class)// integrate junit with spring
@@ -58,5 +60,13 @@ class CustomerRepoTest {
     void findCustomerByNameAndAddress() {
         Customer customer = customerRepo.findCustomerByNameAndAddress("Pathum", "Kandy");
         System.out.println(customer.toString());
+    }
+
+    @Test
+    void methodOne() {
+        List<Customer> customer = customerRepo.methodOne();
+        for (Customer c : customer) {
+            System.out.println(c.toString());
+        }
     }
 }

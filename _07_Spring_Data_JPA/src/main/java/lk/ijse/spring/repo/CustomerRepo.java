@@ -2,6 +2,9 @@ package lk.ijse.spring.repo;
 
 import lk.ijse.spring.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface CustomerRepo extends JpaRepository<Customer, String> {
     Customer findCustomerByName(String name);
@@ -17,4 +20,9 @@ public interface CustomerRepo extends JpaRepository<Customer, String> {
     Integer removeCustomerByName(String name);
 
     Customer findCustomerByNameAndAddress(String name, String address);
+
+    //Query
+    //Native SQL
+    @Query(value = "SELECT * FROM customer", nativeQuery = true)
+    List<Customer> methodOne();
 }
