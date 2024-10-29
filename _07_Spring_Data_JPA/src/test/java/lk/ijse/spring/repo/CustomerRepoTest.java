@@ -69,4 +69,34 @@ class CustomerRepoTest {
             System.out.println(c.toString());
         }
     }
+
+    @Test
+    void methodTwo() {
+        Customer customer = customerRepo.methodTwo();
+        System.out.println(customer.toString());
+    }
+
+    @Test
+    void methodThree() {
+        Customer customer = customerRepo.methodThree("C001", "Pathum");
+        System.out.println(customer.toString());
+    }
+
+    @Test
+    void methodFour() {
+        Customer customer = customerRepo.methodFour("C001", "Pathum");
+        System.out.println(customer.toString());
+    }
+
+    @Test
+    void methodFive() {
+        List<Customer> customer = customerRepo.methodFive();
+        System.out.println(customer.toString());
+    }
+
+    @Test
+    void methodSix() {
+        List<Customer> customer = customerRepo.methodSix();
+        System.out.println(customer.toString());
+    }
 }
