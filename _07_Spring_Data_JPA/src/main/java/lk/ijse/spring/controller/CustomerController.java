@@ -38,4 +38,9 @@ public class CustomerController {
        customerService.getAllCustomers();
        return new ResponseUtil("OK", "All Customers", customerService.getAllCustomers());
     }
+
+    @GetMapping(params = "name")
+    public ResponseUtil getCustomerByName(@RequestParam("name") String name) {
+       return new ResponseUtil("OK", " Customer : " + name, customerService.getCustomerByName(name));
+    }
 }

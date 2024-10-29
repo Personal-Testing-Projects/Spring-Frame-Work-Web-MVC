@@ -9,4 +9,5 @@ public interface CustomerService {
     void deleteCustomer(String id);
     void updateCustomer(CustomerDTO customerDTO);
     ArrayList<CustomerDTO> getAllCustomers();
+    CustomerDTO getCustomerByName(String name);
 }
