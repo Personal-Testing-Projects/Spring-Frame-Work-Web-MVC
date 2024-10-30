@@ -36,16 +36,32 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomer() {
+        //valid
+        assertDoesNotThrow(() -> customerService.deleteCustomer("C001"));
+
+        //invalid
+        assertThrows(RuntimeException.class, () -> customerService.deleteCustomer("C0010"));
     }
 
     @Test
     void updateCustomer() {
+        //valid
+        assertDoesNotThrow(() -> customerService.updateCustomer(new CustomerDTO("C001", "Pathum", "Kandy", "0712345678")));
+
+        //invalid
+        assertThrows(RuntimeException.class, () -> customerService.updateCustomer(new CustomerDTO("C0010", "Pathum", "Kandy", "0712345678")));
     }
 
     @Test
     void getAllCustomers() {
-        assertTrue(true);
-        assertFalse(false);
+        //assertTrue(true);
+        //assertFalse(false);
+
+        //valid
+        assertTrue(customerService.getAllCustomers().size() > 0);
+
+        //invalid
+        assertFalse(customerService.getAllCustomers().isEmpty());
     }
 
     @Test
